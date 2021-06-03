@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:spisok_pokupok_1="clr-namespace:spisok_pokupok_1"
+             x:Class="spisok_pokupok_1.MainPage"
+             x:DataType="spisok_pokupok_1:ViewModel">
+    <ContentPage.Resources>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="WidthRequest" Value="45"/>
+            <Setter Property="HeightRequest" Value="45" />
+            <Setter Property="Command" Value = "{Binding ChangeColor}"/>
+            <Setter Property="CommandParameter" Value="{Binding Source={RelativeSource Mode=Self}, Path=BackgroundColor}"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <CollectionView ItemsSource="{Binding Foods}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="spisok_pokupok_1:Food">
+                    <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="{Binding Clr}"  HorizontalOptions="FillAndExpand">
+                            <Label BackgroundColor="{Binding Clr}" 
+                                   FontSize="Large" 
+                                   Text="{Binding Name}" 
+                                   HorizontalOptions="FillAndExpand"/>
+                        </Frame>
+                        <Frame 
+                            BackgroundColor="{Binding Clr}" >
+                            <Label BackgroundColor="{Binding Clr}" 
+                                   FontSize="Large" 
+                                   Text="{Binding Quantity}"
+                                   WidthRequest="40"/>
+                        </Frame>
+                        <Frame BackgroundColor="{Binding Clr}" >
+                            <CheckBox Color="Black"
+                                      IsChecked="{Binding Checked}"/>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Orientation="Horizontal">
+            
+            <Entry 
+                MinimumWidthRequest="100"
+                WidthRequest="300"
+                HorizontalOptions="StartAndExpand"
+                x:Name="MainEntry"
+                Margin="0,0,0,0"
+                Placeholder="Enter product"
+                VerticalOptions="CenterAndExpand"
+                />
+            
+                <Label Text="{Binding Quantity}" FontSize="Medium" VerticalTextAlignment="Center"
+                       
+                            WidthRequest="40"   HorizontalTextAlignment="Center" Margin="0,0,10,0"
+                       BackgroundColor="{Binding Clr}"/>
+            
+        </StackLayout>
+        <StackLayout Orientation ="Horizontal">
+
+            <Button 
+                BackgroundColor="Red"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button 
+                BackgroundColor="Orange"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button 
+                BackgroundColor="Yellow"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button 
+                BackgroundColor="LightGreen"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button 
+                BackgroundColor="LightSkyBlue"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button 
+                BackgroundColor="Blue"
+                Style="{StaticResource Button}">
+            </Button>
+
+            <Button
+                BackgroundColor="MediumPurple"
+                Style="{StaticResource Button}">
+            </Button>
+
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                x:Name="AddElement"
+                Text="+ product"
+                Font="Large"
+                BorderWidth="1"
+                Command="{Binding AddCommand}"
+                CommandParameter="{Binding Source={Reference MainEntry}, Path=Text}">
+            </Button>
+            <Stepper
+                
+                 Minimum="0"                       
+                 x:Name="QuantityStepper"  
+                 Value="{Binding Quantity}"    
+                 Maximum="99"
+                 Increment="1" />
+        </StackLayout>
+        <StackLayout>
+            <Button Text="Del Choosed"                                                                                                                    
+                    Command="{Binding DeleteChoosed}">
+            </Button>
+        </StackLayout>
+    </StackLayout>
+
+
+
+
+</ContentPage>
